@@ -6,7 +6,6 @@ public class PublicacionCalificaciones extends Situacion {
     private String periodo;
 
     public PublicacionCalificaciones(String materia, String periodo) {
-        super("Publicación de calificaciones");
         this.materia = materia;
         this.periodo = periodo;
     }
@@ -24,10 +23,6 @@ public class PublicacionCalificaciones extends Situacion {
 
     @Override
     public String toString() {
-        return "PublicacionCalificaciones{" +
-               "descripcion='" + getDescripcion() + '\'' +
-               ", materia='" + materia + '\'' +
-               ", periodo='" + periodo + '\'' +
-               '}';
+        return "PublicacionCalificaciones{materia='" + materia + "', periodo='" + periodo + "'}";
     }
 }

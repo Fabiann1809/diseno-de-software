@@ -4,17 +4,16 @@ import java.time.LocalDate;
 
 public class RecordatorioPago extends Situacion {
 
-    private double monto;
+    private Double monto;
     private LocalDate fechaLimite;
 
-    public RecordatorioPago(double monto, LocalDate fechaLimite) {
-        super("Recordatorio de pago de matrícula");
+    public RecordatorioPago(Double monto, LocalDate fechaLimite) {
         this.monto = monto;
         this.fechaLimite = fechaLimite;
     }
 
-    public double getMonto() { return monto; }
-    public void setMonto(double monto) { this.monto = monto; }
+    public Double getMonto() { return monto; }
+    public void setMonto(Double monto) { this.monto = monto; }
 
     public LocalDate getFechaLimite() { return fechaLimite; }
     public void setFechaLimite(LocalDate fechaLimite) { this.fechaLimite = fechaLimite; }
@@ -27,10 +26,6 @@ public class RecordatorioPago extends Situacion {
 
     @Override
     public String toString() {
-        return "RecordatorioPago{" +
-               "descripcion='" + getDescripcion() + '\'' +
-               ", monto=" + monto +
-               ", fechaLimite=" + fechaLimite +
-               '}';
+        return "RecordatorioPago{monto=" + monto + ", fechaLimite=" + fechaLimite + '}';
     }
 }

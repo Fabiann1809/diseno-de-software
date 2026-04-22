@@ -6,7 +6,6 @@ public class CancelacionClase extends Situacion {
     private String salon;
 
     public CancelacionClase(String docente, String salon) {
-        super("Aviso de cancelación de clase");
         this.docente = docente;
         this.salon = salon;
     }
@@ -24,10 +23,6 @@ public class CancelacionClase extends Situacion {
 
     @Override
     public String toString() {
-        return "CancelacionClase{" +
-               "descripcion='" + getDescripcion() + '\'' +
-               ", docente='" + docente + '\'' +
-               ", salon='" + salon + '\'' +
-               '}';
+        return "CancelacionClase{docente='" + docente + "', salon='" + salon + "'}";
     }
 }

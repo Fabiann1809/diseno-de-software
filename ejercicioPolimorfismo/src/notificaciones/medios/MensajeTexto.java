@@ -1,42 +1,28 @@
 package notificaciones.medios;
 
+import notificaciones.Destinatario;
+
 public class MensajeTexto extends MedioEnvio {
 
-    private String numeroCelular;
-    private String operadora;
+    public MensajeTexto() {}
 
-    public MensajeTexto(String numeroCelular, String operadora) {
-        super("Mensaje de texto (SMS)");
-        this.numeroCelular = numeroCelular;
-        this.operadora = operadora;
-    }
-
-    public String getNumeroCelular() { return numeroCelular; }
-    public void setNumeroCelular(String numeroCelular) { this.numeroCelular = numeroCelular; }
-
-    public String getOperadora() { return operadora; }
-    public void setOperadora(String operadora) { this.operadora = operadora; }
-
-    public void validarNumero() {
-        if (!numeroCelular.matches("\\+?[0-9]{7,15}")) {
-            throw new IllegalArgumentException("Número de celular inválido: " + numeroCelular);
+    private void validarNumero(Destinatario destinatario) {
+        String numero = destinatario.getNumeroCelular();
+        if (numero == null || numero.isEmpty()) {
+            throw new IllegalArgumentException("Número celular vacío o nulo para: " + destinatario.getNombre());
         }
     }
 
     @Override
-    public void enviar(String mensaje) {
-        validarNumero();
+    public void enviar(String mensaje, Destinatario destinatario) {
+        validarNumero(destinatario);
         System.out.println("[SMS]");
-        System.out.println("  Número:   " + numeroCelular + " (" + operadora + ")");
+        System.out.println("  Número:   " + destinatario.getNumeroCelular() + " (" + destinatario.getNombre() + ")");
         System.out.println("  Mensaje:  " + mensaje);
     }
 
     @Override
     public String toString() {
-        return "MensajeTexto{" +
-               "nombre='" + getNombre() + '\'' +
-               ", numeroCelular='" + numeroCelular + '\'' +
-               ", operadora='" + operadora + '\'' +
-               '}';
+        return "MensajeTexto{}";
     }
 }

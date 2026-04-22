@@ -1,3 +1,4 @@
+import notificaciones.Destinatario;
 import notificaciones.Notificacion;
 import notificaciones.medios.CorreoElectronico;
 import notificaciones.medios.MensajeTexto;
@@ -8,8 +9,7 @@ import notificaciones.situaciones.PublicacionCalificaciones;
 import notificaciones.situaciones.RecordatorioPago;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
@@ -19,49 +19,62 @@ public class Main {
         System.out.println("║  SISTEMA DE NOTIFICACIONES UNIVERSITARIAS ║");
         System.out.println("╚══════════════════════════════════════════╝");
 
-        // Caso 1: Calificaciones disponibles → correo electrónico
+        // --- Destinatarios ---
+        Destinatario laura   = new Destinatario("Laura Gómez",       "laura.gomez@universidad.edu",   "+573001111111", "token-laura-001");
+        Destinatario carlos  = new Destinatario("Carlos Martínez",   "carlos.martinez@universidad.edu", "+573002222222", "token-carlos-002");
+        Destinatario valeria = new Destinatario("Valeria Torres",    "valeria.torres@universidad.edu", "+573003333333", "token-valeria-003");
+        Destinatario miguel  = new Destinatario("Miguel Ángel Ruiz", "miguel.ruiz@universidad.edu",   "+573004444444", "token-miguel-004");
+        Destinatario sinDatos = new Destinatario("Sin Datos", "", "", "");
+
+        // --- Caso 1: múltiples destinatarios, múltiples medios  ---
+        // Situación: PublicacionCalificaciones → medios: correo + SMS + app
         Notificacion n1 = new Notificacion(
             "NTF-001",
-            "Laura Gómez",
+            List.of(laura, carlos, valeria),
             new PublicacionCalificaciones("Estructuras de Datos", "2025-1"),
-            new CorreoElectronico("laura.gomez@universidad.edu", "Calificaciones disponibles",
-                Collections.emptyList())
+            List.of(
+                new CorreoElectronico("Calificaciones disponibles"),
+                new MensajeTexto(),
+                new NotificacionApp()
+            )
         );
 
-        // Caso 2: Recordatorio de pago → SMS
+        // --- Caso 2: un destinatario, un medio ---
+        // Situación: RecordatorioPago → medio: SMS
         Notificacion n2 = new Notificacion(
             "NTF-002",
-            "Carlos Martínez",
+            List.of(carlos),
             new RecordatorioPago(1850000.00, LocalDate.of(2025, 5, 15)),
-            new MensajeTexto("+573001234567", "Claro")
+            List.of(new MensajeTexto())
         );
 
-        // Caso 3: Cancelación de clase → notificación app Android
+        // --- Caso 3: un destinatario, un medio ---
+        // Situación: CancelacionClase → medio: app móvil
         Notificacion n3 = new Notificacion(
             "NTF-003",
-            "Valentina Torres",
+            List.of(valeria),
             new CancelacionClase("Dr. Ramírez", "Aula 204-B"),
-            new NotificacionApp("token-abc-987xyz", "Android")
+            List.of(new NotificacionApp())
         );
 
-        // Caso 4: Confirmación de inscripción → correo con adjuntos
+        // --- Caso 4: dos destinatarios, correo ---
+        // Situación: ConfirmacionInscripcion → medio: correo
         Notificacion n4 = new Notificacion(
             "NTF-004",
-            "Miguel Ángel Ruiz",
+            List.of(miguel, laura),
             new ConfirmacionInscripcion("Congreso Nacional de Ingeniería", LocalDate.of(2025, 6, 10)),
-            new CorreoElectronico("miguel.ruiz@universidad.edu", "Inscripción confirmada",
-                Arrays.asList("programa_congreso.pdf", "credencial_digital.pdf"))
+            List.of(new CorreoElectronico("Inscripción confirmada"))
         );
 
-        // Caso 5 (error): SMS con número inválido — demuestra estado FALLIDO
+        // --- Caso 5 (error): destinatario sin datos de contacto → estado FALLIDO ---
         Notificacion n5 = new Notificacion(
             "NTF-005",
-            "Pedro Salcedo",
+            List.of(sinDatos),
             new RecordatorioPago(500000.00, LocalDate.of(2025, 5, 1)),
-            new MensajeTexto("numero-invalido", "Movistar")
+            List.of(new CorreoElectronico("Pago pendiente"), new MensajeTexto())
         );
 
-        // --- Polimorfismo en acción: mismo método enviar() sobre distintas combinaciones ---
+        // Polimorfismo
         n1.enviar();
         n2.enviar();
         n3.enviar();
@@ -69,9 +82,7 @@ public class Main {
         n5.enviar();
 
         // --- toString() de cada notificación ---
-        System.out.println("\n╔══════════════════════════════════════════╗");
-        System.out.println("║         DETALLE DE OBJETOS (toString)     ║");
-        System.out.println("╚══════════════════════════════════════════╝");
+        System.out.println("\n método toString");
         System.out.println(n1);
         System.out.println(n2);
         System.out.println(n3);
@@ -79,12 +90,10 @@ public class Main {
         System.out.println(n5);
 
         // --- Resumen de estados ---
-        System.out.println("\n╔══════════════════════════╗");
-        System.out.println("║       RESUMEN ENVÍOS      ║");
-        System.out.println("╠══════════════════════════╣");
+        System.out.println("\n; RESUMEN ENVÍOS");
         for (Notificacion n : new Notificacion[]{n1, n2, n3, n4, n5}) {
             System.out.printf("║ %-10s → %-10s ║%n", n.getCodigo(), n.getEstado());
         }
-        System.out.println("╚══════════════════════════╝");
+
     }
 }

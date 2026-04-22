@@ -8,7 +8,6 @@ public class ConfirmacionInscripcion extends Situacion {
     private LocalDate fecha;
 
     public ConfirmacionInscripcion(String evento, LocalDate fecha) {
-        super("Confirmación de inscripción a evento académico");
         this.evento = evento;
         this.fecha = fecha;
     }
@@ -26,10 +25,6 @@ public class ConfirmacionInscripcion extends Situacion {
 
     @Override
     public String toString() {
-        return "ConfirmacionInscripcion{" +
-               "descripcion='" + getDescripcion() + '\'' +
-               ", evento='" + evento + '\'' +
-               ", fecha=" + fecha +
-               '}';
+        return "ConfirmacionInscripcion{evento='" + evento + "', fecha=" + fecha + '}';
     }
 }
