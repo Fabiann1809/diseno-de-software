@@ -38,8 +38,7 @@ public class PrestamoController {
         return ResponseEntity.ok(prestamoService.calcularMora(id));
     }
 
-    // cancelarPrestamo() del diagrama
-    @PutMapping("/{id}/cancelar")
+    @PatchMapping("/{id}/estado")
     public ResponseEntity<PrestamoResponse> cancelarPrestamo(@PathVariable String id) {
         return ResponseEntity.ok(prestamoService.cancelarPrestamo(id));
     }

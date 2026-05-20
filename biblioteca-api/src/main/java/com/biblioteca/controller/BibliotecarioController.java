@@ -25,8 +25,7 @@ public class BibliotecarioController {
                 .body(bibliotecarioService.registrarPrestamo(id, request));
     }
 
-    // registrarDevolucion() del diagrama
-    @PutMapping("/{id}/prestamos/{prestamoId}/devolver")
+    @PostMapping("/{id}/prestamos/{prestamoId}/devolucion")
     public ResponseEntity<PrestamoResponse> registrarDevolucion(
             @PathVariable String id, @PathVariable String prestamoId) {
         return ResponseEntity.ok(bibliotecarioService.registrarDevolucion(id, prestamoId));
