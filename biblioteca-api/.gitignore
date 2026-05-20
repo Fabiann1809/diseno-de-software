@@ -34,3 +34,8 @@ build/
 
 ### Claude Code ###
 .claude/
+
+### Credenciales locales ###
+application-local.properties
+*.env
+.env
