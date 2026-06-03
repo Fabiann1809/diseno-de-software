@@ -72,17 +72,23 @@ docker-compose down
 ---
 
 ## Diagramas
+### Diagrama de contexto
+<img width="1747" height="745" alt="image" src="https://github.com/user-attachments/assets/21ed6210-8f5a-49e1-b5af-522e69cd58a8" />
+
 
 ### Diagrama de Clases
+<img width="1516" height="1085" alt="image" src="https://github.com/user-attachments/assets/cb3d12b2-dd7a-4653-b9a3-e48411595971" />
 
 
 
 ### Diagrama de Vista de Desarrollo
 
+<img width="1041" height="1107" alt="image" src="https://github.com/user-attachments/assets/80086f68-8ef8-4013-96bb-53747a6d3c39" />
 
 
 ### Diagrama de Componentes
 
+<img width="1792" height="730" alt="image" src="https://github.com/user-attachments/assets/a8c1d403-3b43-4448-ad7a-cd3eec4bcef3" />
 
 
 ### Diagrama de Despliegue
