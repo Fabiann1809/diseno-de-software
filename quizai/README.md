@@ -92,6 +92,8 @@ docker-compose down
 
 
 ### Diagrama de Despliegue
+<img width="730" height="894" alt="image" src="https://github.com/user-attachments/assets/3cbbb238-74ce-47fb-9084-e745ddb940d8" />
+
 
 
 
