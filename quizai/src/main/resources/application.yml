@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: quizai
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+      database: ${MONGODB_DATABASE:quizai_db}
+
+server:
+  port: ${PORT:8080}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+  groq:
+    api-url: https://api.groq.com/openai/v1/chat/completions
+    api-key: ${GROQ_API_KEY}
+    model: ${GROQ_MODEL:llama-3.3-70b-versatile}
+    max-tokens: ${GROQ_MAX_TOKENS:2048}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+
+logging:
+  level:
+    com.quizai: INFO
+    org.springframework.security: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
